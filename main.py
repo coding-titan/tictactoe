@@ -6,7 +6,7 @@ import random
 # Add tie check to win check
 
 #Initializing coordinates
-coordinate_dict = {"a1": " ", "a2": " ", "a3": " ", "b1": " ", "b2": " ", "b3": " ", "c1": " ", "c2": " ", "c3": " "}
+coordinate_dict = {"a1": "X", "a2": "O", "a3": " ", "b1": "O", "b2": "X", "b3": " ", "c1": "O", "c2": " ", "c3": " "}
 
 #List of combinations leading to win
 win_combinations = [
@@ -41,6 +41,7 @@ def win_check(player):
                 print("\nI shall retire - please do let me know if you wish to play again and it shall be my pleasure to do so!")
                 time.sleep(5)
                 exit()
+        tie_check()
     if player == "p2":
         for key, value in coordinate_dict.items():
             if value.lower() == "o":
@@ -48,7 +49,7 @@ def win_check(player):
         for combination in win_combinations:
             if all(combo in o_list for combo in combination):
                 current_playfield = update_playfield()
-                time.sleep(4)
+                time.sleep(5)
                 print("\n...I cannot believe it.")
                 time.sleep(3)
                 print("\nBy way of some unfathomable prank of the universe, my circles have accidentally formed a line.")
@@ -64,13 +65,30 @@ def win_check(player):
                 print("\nUntil then, I bid you adieu.")
                 time.sleep(5)
                 exit()
+        tie_check()
                 
+def tie_check():
+    if " " not in coordinate_dict.values():
+        current_playfield = update_playfield()
+        time.sleep(4)
+        print("\nIt appears that, somehow, we have arrived at a tie.")
+        time.sleep(3)
+        print("\nThis no doubt is due to some entirely random event, compelling me to place my circles in such a way as to block you from victory.")
+        time.sleep(4)
+        print("\nFrom the bottom of my robotic heart, I apologize.")
+        time.sleep(3)
+        print("\nDo let me know if you wish to play again, allowing me to correct this harrowing error.")
+        time.sleep(5)
+        exit()
+        
+
 def p1_play():
-    player_input = input("Place your cross:\n\n")
+    player_input = input("Please select where to place your cross:\n\n")
     while player_input not in coordinate_dict.keys() and player_input != "quit":
         player_input = input("I must apologize, but that does not look to my humble eyes a valid input - write a coordinate (such as \"b2\") or \"quit\" to exit.\n\n")
     while coordinate_dict[player_input] != " ":
-        player_input = input("My deepest apologies, but it appears that square is already taken. Please choose another at your leisure.\n\n")
+        time.sleep(1)
+        player_input = input("\nMy deepest apologies, but it appears that square is already taken. Please choose another at your leisure.\n\n")
     if player_input.lower() == "quit":
         exit()
     coordinate_dict[player_input.lower()] = "X"
@@ -87,9 +105,9 @@ def update_playfield():
     current_playfield = f"""
       1   2   3
     A {coordinate_dict["a1"]} | {coordinate_dict["a2"]} | {coordinate_dict["a3"]} |
-    —————————–––
+    —————————––––
     B {coordinate_dict["b1"]} | {coordinate_dict["b2"]} | {coordinate_dict["b3"]} |
-    —————————–––
+    —————————––––
     C {coordinate_dict["c1"]} | {coordinate_dict["c2"]} | {coordinate_dict["c3"]} |
     """
     print(current_playfield)
