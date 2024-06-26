@@ -2,23 +2,33 @@
 
 import time
 
+coordinate_dict = {"a1": " ", "a2": " ", "a3": " ", "b1": " ", "b2": " ", "b3": " ", "c1": " ", "c2": " ", "c3": " "}
+
+win_combinations = [
+    ("a1", "a2", "a3"),
+    ("b1", "b2", "b3"),
+    ("c1", "c2", "c3"),
+    ("a1", "b1", "c1"),
+    ("a2", "b2", "c2"),
+    ("a3", "b3", "c3"),
+    ("a1", "b2", "c3"),
+    ("a3", "b2", "c1")
+]
+
 def win_check(coordinate_dict, player):
     x_list = []
     o_list = []
     if player == "p1":
-        for coordinate in coordinate_dict.values():
-            if coordinate.lower() == "x":
-                x_list.append() # Here you need to append the dictionary key associated with the value that you just found out was X
-                print(x_list)
-        if ("a1", "a2", "a3") in x_list:
-            print("Player 1 wins!")
-            time.sleep(2)
-            exit()
-    
-
-available_coordinates = ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3"]
-
-coordinate_dict = {"a1": " ", "a2": " ", "a3": " ", "b1": " ", "b2": " ", "b3": " ", "c1": " ", "c2": " ", "c3": " "}
+        for key, value in coordinate_dict.items():
+            if value.lower() == "x":
+                x_list.append(key)
+        for combination in win_combinations:
+            if combination[0] and combination[1] and combination[2] in x_list:
+                print(current_playfield)
+                time.sleep(1)
+                print("Player 1 wins!")
+                time.sleep(3)
+                exit()
 
 while True:
     #Update playfield
@@ -33,13 +43,10 @@ while True:
     print(current_playfield)
     #Player input
     player_input = input("Place your cross: ")
-    while player_input not in available_coordinates:
+    while player_input not in coordinate_dict.keys():
         player_input = input("Not a valid input - place your cross or type \"quit\" to exit")
     if player_input.lower() == "quit":
         exit()
-    #time.sleep(1)
     coordinate_dict[player_input.lower()] = "X"
-    #time.sleep(1)
-
     #Win check for player
     win_check(coordinate_dict, "p1")
