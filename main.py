@@ -30,6 +30,17 @@ def win_check(player):
                 print("Player 1 wins!")
                 time.sleep(3)
                 exit()
+    if player == "p2":
+        for key, value in coordinate_dict.items():
+            if value.lower() == "o":
+                o_list.append(key)
+        for combination in win_combinations:
+            if all(combo in o_list for combo in combination):
+                current_playfield = update_playfield()
+                time.sleep(1)
+                print("Computer wins!")
+                time.sleep(3)
+                exit()
                 
 def p1_play():
     player_input = input("Place your cross: ")
