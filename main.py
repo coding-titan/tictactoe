@@ -3,8 +3,10 @@
 import time
 import random
 
+#Initializing coordinates
 coordinate_dict = {"a1": " ", "a2": " ", "a3": " ", "b1": " ", "b2": " ", "b3": " ", "c1": " ", "c2": " ", "c3": " "}
 
+#List of combinations leading to win
 win_combinations = [
     ("a1", "a2", "a3"),
     ("b1", "b2", "b3"),
@@ -16,6 +18,7 @@ win_combinations = [
     ("a3", "b2", "c1")
 ]
 
+#Functions
 def win_check(player):
     x_list = []
     o_list = []
@@ -70,14 +73,12 @@ def update_playfield():
     print(current_playfield)
     return current_playfield
 
+#Core game loop
 while True:
-    #Update playfield
     current_playfield = update_playfield()
-    #Player input
     p1_play()
     win_check("p1")
     current_playfield = update_playfield()
-    
     ai_play()
     win_check("p2")
     current_playfield = update_playfield()
