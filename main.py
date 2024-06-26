@@ -3,6 +3,8 @@
 import time
 import random
 
+# Add tie check to win check
+
 #Initializing coordinates
 coordinate_dict = {"a1": " ", "a2": " ", "a3": " ", "b1": " ", "b2": " ", "b3": " ", "c1": " ", "c2": " ", "c3": " "}
 
@@ -46,9 +48,9 @@ def win_check(player):
         for combination in win_combinations:
             if all(combo in o_list for combo in combination):
                 current_playfield = update_playfield()
-                time.sleep(3)
+                time.sleep(4)
                 print("\n...I cannot believe it.")
-                time.sleep(1)
+                time.sleep(3)
                 print("\nBy way of some unfathomable prank of the universe, my circles have accidentally formed a line.")
                 time.sleep(3)
                 print("\nI am beyond distraught.")
@@ -57,9 +59,9 @@ def win_check(player):
                 time.sleep(3)
                 print("\nI shall retire - please do let me know if you wish to play again and it shall be my pleasure to do so.")
                 time.sleep(3)
-                print("I shall spare no expense in making sure this does not happen again.")
+                print("\nNo expense will be spared in making sure this does not happen again.")
                 time.sleep(3)
-                print("Until then, I bid you adieu.")
+                print("\nUntil then, I bid you adieu.")
                 time.sleep(5)
                 exit()
                 
@@ -67,6 +69,8 @@ def p1_play():
     player_input = input("Place your cross:\n\n")
     while player_input not in coordinate_dict.keys() and player_input != "quit":
         player_input = input("I must apologize, but that does not look to my humble eyes a valid input - write a coordinate (such as \"b2\") or \"quit\" to exit.\n\n")
+    while coordinate_dict[player_input] != " ":
+        player_input = input("My deepest apologies, but it appears that square is already taken. Please choose another at your leisure.\n\n")
     if player_input.lower() == "quit":
         exit()
     coordinate_dict[player_input.lower()] = "X"
@@ -114,7 +118,7 @@ if answer.lower() in ("no", "nope", "nah"):
     time.sleep(3)
     exit()
 if answer.lower() in ("yes", "yup", "yeah"):
-    print("Fantastic! Allow me to set it up.")
+    print("\nFantastic! Allow me to set it up.")
     time.sleep(2)
     current_playfield = update_playfield()
     time.sleep(2)
