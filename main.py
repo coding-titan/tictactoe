@@ -146,8 +146,7 @@ if answer.lower() in ("yes", "yup", "yeah"):
     time.sleep(2)
 
 #Core game loop
-while True:    
-    # Game loop
+while True:
     current_playfield = update_playfield()
     time.sleep(2)
     p1_play()
