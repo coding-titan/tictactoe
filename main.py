@@ -3,8 +3,6 @@
 import time
 import random
 
-# Add tie check to win check
-
 #Initializing coordinates
 coordinate_dict = {"a1": "X", "a2": "O", "a3": " ", "b1": "O", "b2": "X", "b3": " ", "c1": "O", "c2": " ", "c3": " "}
 
