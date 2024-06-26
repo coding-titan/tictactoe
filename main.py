@@ -30,8 +30,14 @@ def win_check(player):
             if all(combo in x_list for combo in combination):
                 current_playfield = update_playfield()
                 time.sleep(1)
-                print("Player 1 wins!")
+                print("\nYou have done it!")
+                time.sleep(2)
+                print("\nThrough your wily wits and incredible intelligence, you have bested me - entirely as expected.")
                 time.sleep(3)
+                print("\nI am overjoyed.")
+                time.sleep(2)
+                print("\nI shall retire - please do let me know if you wish to play again and it shall be my pleasure to do so!")
+                time.sleep(5)
                 exit()
     if player == "p2":
         for key, value in coordinate_dict.items():
@@ -40,15 +46,27 @@ def win_check(player):
         for combination in win_combinations:
             if all(combo in o_list for combo in combination):
                 current_playfield = update_playfield()
-                time.sleep(1)
-                print("Computer wins!")
                 time.sleep(3)
+                print("\n...I cannot believe it.")
+                time.sleep(1)
+                print("\nBy way of some unfathomable prank of the universe, my circles have accidentally formed a line.")
+                time.sleep(3)
+                print("\nI am beyond distraught.")
+                time.sleep(2)
+                print("\nA thousand apologies, folded into a thousand more.")
+                time.sleep(3)
+                print("\nI shall retire - please do let me know if you wish to play again and it shall be my pleasure to do so.")
+                time.sleep(3)
+                print("I shall spare no expense in making sure this does not happen again.")
+                time.sleep(3)
+                print("Until then, I bid you adieu.")
+                time.sleep(5)
                 exit()
                 
 def p1_play():
-    player_input = input("Place your cross: ")
-    while player_input not in coordinate_dict.keys():
-        player_input = input("Not a valid input - place your cross or type \"quit\" to exit")
+    player_input = input("Place your cross:\n\n")
+    while player_input not in coordinate_dict.keys() and player_input != "quit":
+        player_input = input("I must apologize, but that does not look to my humble eyes a valid input - write a coordinate (such as \"b2\") or \"quit\" to exit.\n\n")
     if player_input.lower() == "quit":
         exit()
     coordinate_dict[player_input.lower()] = "X"
@@ -73,13 +91,54 @@ def update_playfield():
     print(current_playfield)
     return current_playfield
 
-#Core game loop
-while True:
+def phrase_chooser():
+    list_of_phrases = [
+        "Excellent!",
+        "Fantastic choice.",
+        "Ah, ingenious.",
+        "A wise move indeed.",
+        "Well played."
+    ]
+    phrase = random.choice(list_of_phrases)
+    return phrase
+
+#Game initialization
+print("\nHello dearest sir or madam! And welcome to your game of Tic, Tac and, as it were, Toe.")
+time.sleep(3)
+answer = input("\nWould it please the esteemed user to start the game? \n\n")
+while not answer.lower() in ("yes", "yup", "yeah", "no", "nope", "nah"):
+    time.sleep(1)
+    answer = input("My deepest apologies, but I do not recognize that answer. Please reply with a single word, either an affirmative or a no, entirely at your leisure.\n\n")
+if answer.lower() in ("no", "nope", "nah"):
+    print("Very well. Feel free to call upon me again at any time!")
+    time.sleep(3)
+    exit()
+if answer.lower() in ("yes", "yup", "yeah"):
+    print("Fantastic! Allow me to set it up.")
+    time.sleep(2)
     current_playfield = update_playfield()
+    time.sleep(2)
+    print("\nI have taken the liberty of preparing this board.")
+    time.sleep(2)
+    print("\nMake your no doubt excellent selection by typing the corresponding coordinates - for example, a1, b2 or c3.")
+    time.sleep(3)
+    print("\nAnd with that - let's get started!")
+    time.sleep(2)
+
+#Core game loop
+while True:    
+    # Game loop
+    current_playfield = update_playfield()
+    time.sleep(2)
     p1_play()
     win_check("p1")
     current_playfield = update_playfield()
+    time.sleep(2)
+    phrase = phrase_chooser()
+    print(phrase)
+    time.sleep(2)
+    print("\nI shall place a circle here: ")
     ai_play()
+    time.sleep(2)
     win_check("p2")
-    current_playfield = update_playfield()
     
